@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Disaster Medical Coordination System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Disaster Medical Coordination System</h1>
+
+        <p class="subtitle">
+            Coordinating emergency patients with hospitals during disasters.
+        </p>
+
+        <div class="dashboard-grid">
+
+            <a href="/responder" class="dashboard-card">
+                <h2>Emergency Responder</h2>
+                <p>Create emergency requests and find suitable hospitals.</p>
+            </a>
+
+            <a href="/hospital" class="dashboard-card">
+                <h2>Hospital Dashboard</h2>
+                <p>Manage capacity, resources, and incoming patients.</p>
+            </a>
+
+            <a href="/command" class="dashboard-card">
+                <h2>Command Center</h2>
+                <p>Monitor emergencies and overall hospital capacity.</p>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

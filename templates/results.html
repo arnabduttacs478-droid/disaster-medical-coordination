@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Matching Results</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Hospital Matching Results</h1>
+
+    <div class="panel">
+        <h3>Emergency #{{ emergency_id }}</h3>
+        <p>Severity: <strong>{{ severity }}</strong></p>
+        <p>Required Resource: <strong>{{ resource }}</strong></p>
+        <p>Status: Active — awaiting hospital selection</p>
+    </div>
+
+    {% if hospitals %}
+
+        {% for hospital in hospitals %}
+        <div class="hospital-card">
+
+            <h2>{{ hospital["name"] }}</h2>
+
+            <p>Distance: {{ hospital["distance"] }} km</p>
+            <p>Available Beds: {{ hospital["available"] }}</p>
+            <p>Incoming Patients: {{ hospital["incoming"] }}</p>
+            <p>Matching Score: {{ hospital["score"] }}</p>
+
+            <a href="{{ url_for(
+                'commit_patient',
+                emergency_id=emergency_id,
+                hospital_id=hospital['id']
+            ) }}">
+                <button>Confirm Hospital</button>
+            </a>
+
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <div class="panel">
+            <h2>No Suitable Hospital Found</h2>
+            <p>The emergency has been recorded, but no hospital
+               currently meets the matching requirements.</p>
+        </div>
+    {% endif %}
+
+    <p><a href="/responder">New Emergency</a></p>
+    <p><a href="/command">Command Center</a></p>
+
+</div>
+</body>
+</html>

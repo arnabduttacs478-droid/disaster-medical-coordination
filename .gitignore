@@ -1,0 +1,3 @@
+venv/
+disaster.db
+__pycache__/

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emergency Responder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Emergency Responder Dashboard</h1>
+
+    <p>
+        Create a new emergency patient request.
+    </p>
+
+    <div class="panel">
+
+        <h2>Emergency Request</h2>
+
+        <form action="/find-hospital" method="POST">
+
+            <label>Patient Severity</label>
+
+            <select name="severity" required>
+
+                <option value="Critical">Critical</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+
+            </select>
+
+
+            <label>Required Resource</label>
+
+            <select name="resource" required>
+
+                <option value="ICU Bed">ICU Bed</option>
+                <option value="General Bed">General Bed</option>
+                <option value="Ventilator">Ventilator</option>
+                <option value="Emergency Care">Emergency Care</option>
+
+            </select>
+
+
+            <button type="submit">
+                Find Suitable Hospital
+            </button>
+
+        </form>
+
+    </div>
+
+    <a href="/">← Back to Main Dashboard</a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hospital Dashboard</h1>
+
+    <p>
+        Manage hospital capacity and disaster resources.
+    </p>
+
+
+    {% for hospital in hospitals %}
+
+    <div class="panel">
+
+        <h2>{{ hospital["name"] }}</h2>
+
+        <p>
+            Distance:
+            {{ hospital["distance"] }} km
+        </p>
+
+        <form action="/hospital/update" method="POST">
+
+            <input
+                type="hidden"
+                name="hospital_id"
+                value="{{ hospital['id'] }}"
+            >
+
+
+            <label>Total Beds</label>
+
+            <input
+                type="number"
+                name="total_beds"
+                value="{{ hospital['total_beds'] }}"
+                min="0"
+            >
+
+
+            <label>Occupied Beds</label>
+
+            <input
+                type="number"
+                name="occupied_beds"
+                value="{{ hospital['occupied_beds'] }}"
+                min="0"
+            >
+
+
+            <label>Incoming Beds</label>
+
+            <input
+                type="number"
+                name="incoming_beds"
+                value="{{ hospital['incoming_beds'] }}"
+                min="0"
+            >
+
+
+            <label>Temporary Beds</label>
+
+            <input
+                type="number"
+                name="temporary_beds"
+                value="{{ hospital['temporary_beds'] }}"
+                min="0"
+            >
+
+
+            <label>Available ICU Beds</label>
+
+            <input
+                type="number"
+                name="icu_beds"
+                value="{{ hospital['icu_beds'] }}"
+                min="0"
+            >
+
+
+            <label>Available Ventilators</label>
+
+            <input
+                type="number"
+                name="ventilators"
+                value="{{ hospital['ventilators'] }}"
+                min="0"
+            >
+
+
+            <label>Emergency Care Capacity</label>
+
+            <input
+                type="number"
+                name="emergency_care"
+                value="{{ hospital['emergency_care'] }}"
+                min="0"
+            >
+
+
+            <button type="submit">
+                Update Hospital Capacity
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+
+    <a href="/">← Back to Main Dashboard</a>
+
+</div>
+
+</body>
+
+</html>

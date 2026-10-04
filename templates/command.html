@@ -1,0 +1,219 @@
+X<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Disaster Command Center</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Disaster Command Center</h1>
+
+    <p>
+        Monitor emergencies and hospital capacity.
+    </p>
+
+
+    <!-- ================= EMERGENCIES ================= -->
+
+    <div class="panel">
+
+        <h2>Emergency Monitoring</h2>
+
+        {% if emergencies %}
+
+            {% for emergency in emergencies %}
+
+            <div class="emergency-card">
+
+                <h3>
+                    Emergency #{{ emergency["id"] }}
+                </h3>
+
+
+                <p>
+                    Severity:
+                    <strong>
+                        {{ emergency["severity"] }}
+                    </strong>
+                </p>
+
+
+                <p>
+                    Required Resource:
+                    {{ emergency["required_resource"] }}
+                </p>
+
+
+                <p>
+                    Status:
+
+                    <strong>
+                        {{ emergency["status"] }}
+                    </strong>
+
+                </p>
+
+
+                <!-- ACTIVE -->
+
+                {% if emergency["status"] == "Active" %}
+
+                    <p>
+                        No hospital committed yet.
+                    </p>
+
+
+                <!-- INCOMING -->
+
+                {% elif emergency["status"] == "Incoming" %}
+
+                    <p>
+                        Patient is on the way to the selected hospital.
+                    </p>
+
+                    <a
+                        href="{{ url_for(
+                            'admit_patient',
+                            emergency_id=emergency['id'],
+                            hospital_id=emergency['matched_hospital_id']
+                        ) }}"
+                    >
+
+                        <button>
+                            Admit Patient
+                        </button>
+
+                    </a>
+
+
+                    <a
+                        href="{{ url_for(
+                            'cancel_patient',
+                            emergency_id=emergency['id'],
+                            hospital_id=emergency['matched_hospital_id']
+                        ) }}"
+                    >
+
+                        <button>
+                            Cancel / Redirect
+                        </button>
+
+                    </a>
+
+
+                <!-- ADMITTED -->
+
+                {% elif emergency["status"] == "Admitted" %}
+
+                    <p>
+                        Patient has been admitted successfully.
+                    </p>
+
+
+                <!-- CANCELLED -->
+
+                {% elif emergency["status"] == "Cancelled" %}
+
+                    <p>
+                        Patient commitment was cancelled or redirected.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <p>
+                No emergencies recorded.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= HOSPITAL CAPACITY ================= -->
+
+    <div class="panel">
+
+        <h2>Hospital Capacity</h2>
+
+
+        {% for hospital in hospitals %}
+
+        <div class="hospital-card">
+
+            <h3>
+                {{ hospital["name"] }}
+            </h3>
+
+
+            <p>
+                Total Beds:
+                {{ hospital["total_beds"] }}
+            </p>
+
+
+            <p>
+                Occupied:
+                {{ hospital["occupied_beds"] }}
+            </p>
+
+
+            <p>
+                Incoming:
+                {{ hospital["incoming_beds"] }}
+            </p>
+
+
+            <p>
+                Temporary:
+                {{ hospital["temporary_beds"] }}
+            </p>
+
+
+            <p>
+
+                Effective Available:
+
+                <strong>
+
+                    {{
+                        hospital["total_beds"]
+                        + hospital["temporary_beds"]
+                        - hospital["occupied_beds"]
+                        - hospital["incoming_beds"]
+                    }}
+
+                </strong>
+
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <a href="/">
+        ← Back to Main Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>
