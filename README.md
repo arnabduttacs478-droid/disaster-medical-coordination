@@ -90,6 +90,27 @@ Capacity Updated
 ```
 
 ---
+## 🖥️ Prototype Screenshots
+
+### Main Dashboard
+
+![Main Dashboard](screenshots/dashboard.png)
+
+### Emergency Responder Dashboard
+
+![Emergency Responder Dashboard](screenshots/Responder.png)
+
+### Hospital Dashboard
+
+![Hospital Dashboard](screenshots/Hospital.png)
+
+### Hospital Matching Results
+
+![Hospital Matching Results](screenshots/Hospital-matching.png)
+
+### Disaster Command Center
+
+![Disaster Command Center](screenshots/Command-center.png)
 
 ## 🏥 Hospital Capacity Model
 
